@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; media-src 'self' data:">
+  <title>Timesheet Dog – Settings</title>
+  <link rel="stylesheet" href="../shared/dog-art.css">
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo" id="logo" data-skin="beagle"></div>
+      <div>
+        <h1>Timesheet Dog</h1>
+        <p>Your furry timesheet buddy</p>
+      </div>
+    </header>
+
+    <p class="status" id="status"></p>
+
+    <nav class="tabs" role="tablist">
+      <button type="button" role="tab" class="tab active" data-tab="general" aria-selected="true">⚙️ General</button>
+      <button type="button" role="tab" class="tab" data-tab="dog" aria-selected="false">🐶 Dog</button>
+      <button type="button" role="tab" class="tab" data-tab="history" aria-selected="false">🔥 History</button>
+    </nav>
+
+    <form id="form" novalidate>
+      <!-- General -->
+      <section class="tab-panel active" data-panel="general" role="tabpanel">
+        <div class="field">
+          <label class="label" for="reminderTime">Reminder time</label>
+          <input type="time" id="reminderTime" required>
+        </div>
+
+        <div class="field">
+          <span class="label">Remind me on</span>
+          <div class="days" id="days"></div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="timesheetUrl">Timesheet URL</label>
+          <div class="row">
+            <input type="url" id="timesheetUrl" placeholder="https://your-company.com/timesheet" required>
+            <button type="button" class="ghost" id="openUrl">Open</button>
+          </div>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-text">
+            <span class="label">Sounds</span>
+            <small>Barks and happy chimes</small>
+          </div>
+          <label class="switch"><input type="checkbox" id="soundEnabled"><span></span></label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-text">
+            <span class="label">Start with Windows</span>
+            <small>Runs quietly in the system tray</small>
+          </div>
+          <label class="switch"><input type="checkbox" id="autoStart"><span></span></label>
+        </div>
+      </section>
+
+      <!-- Dog -->
+      <section class="tab-panel" data-panel="dog" role="tabpanel">
+        <div class="field">
+          <span class="label">Choose your buddy</span>
+          <div class="skins" id="skins" role="radiogroup" aria-label="Pet"></div>
+        </div>
+
+        <div class="field">
+          <span class="label">Preview moods</span>
+          <div class="moods">
+            <button type="button" class="ghost mood" data-level="0" title="Friendly">😊</button>
+            <button type="button" class="ghost mood" data-level="1" title="Annoyed (after 1 snooze)">😒</button>
+            <button type="button" class="ghost mood" data-level="2" title="Angry (after 2 snoozes)">😤</button>
+            <button type="button" class="ghost mood" data-level="3" title="Furious (after 3 snoozes)">🤬</button>
+          </div>
+          <small class="hint">Each snooze makes the dog grumpier, and the longer snooze options disappear.</small>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-text">
+            <span class="label">Bark sound</span>
+            <small id="soundLabel">Built-in bark</small>
+          </div>
+          <button type="button" class="ghost small" id="playSound">▶</button>
+          <button type="button" class="ghost small" id="chooseSound">Choose…</button>
+          <button type="button" class="ghost small" id="clearSound">Reset</button>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-text">
+            <span class="label">Surprise peeks</span>
+            <small>Pops out now and then during the workday to say hi</small>
+          </div>
+          <button type="button" class="ghost small" id="previewPeek">Preview</button>
+          <label class="switch"><input type="checkbox" id="surprisePeeks"><span></span></label>
+        </div>
+      </section>
+
+      <div class="form-footer">
+        <p class="error" id="error" role="alert"></p>
+        <div class="actions">
+          <button type="button" class="ghost" id="test">🐾 Test reminder</button>
+          <button type="button" class="ghost" id="reset">Reset to defaults</button>
+          <button type="submit" class="primary">Save</button>
+        </div>
+        <p class="source" id="source"></p>
+      </div>
+    </form>
+
+    <!-- History -->
+    <section class="tab-panel" data-panel="history" role="tabpanel">
+      <div class="stats">
+        <div class="stat"><span class="stat-num" id="statStreak">0</span><span class="stat-label">🔥 current streak</span></div>
+        <div class="stat"><span class="stat-num" id="statBest">0</span><span class="stat-label">🏆 best streak</span></div>
+        <div class="stat"><span class="stat-num" id="statMonth">0/0</span><span class="stat-label">✅ filled this month</span></div>
+      </div>
+
+      <div class="calendar">
+        <div class="cal-head">
+          <button type="button" class="ghost small" id="prevMonth" aria-label="Previous month">‹</button>
+          <strong id="monthLabel"></strong>
+          <button type="button" class="ghost small" id="nextMonth" aria-label="Next month">›</button>
+        </div>
+        <div class="cal-grid" id="calendar"></div>
+      </div>
+
+      <div class="legend">
+        <span><i class="dot ontime"></i>On time</span>
+        <span><i class="dot late"></i>After snoozing</span>
+        <span><i class="dot missed"></i>Missed</span>
+        <span><i class="dot none"></i>No reminder</span>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="../shared/dog-art.js"></script>
+  <script src="../shared/sounds.js"></script>
+  <script src="settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+/* Colours, parts and default visibility for the dog drawing (see dog-art.js).
+   Put data-skin="…" on any element that contains the SVG. */
+
+[data-skin] .dog-svg * { transform-box: fill-box; }
+
+[data-skin] .fur { fill: var(--fur); }
+[data-skin] .fur-body { fill: var(--fur-body); }
+[data-skin] .cream { fill: var(--cream); }
+[data-skin] .blaze { fill: var(--cream); }
+[data-skin] .ear-dark { fill: var(--ear); }
+[data-skin] .ear-inner { fill: var(--ear-inner); }
+[data-skin] .tail { fill: none; stroke: var(--tail); stroke-width: 16; stroke-linecap: round; }
+[data-skin] .tail-cat { stroke-width: 11; }
+[data-skin] .collar { fill: none; stroke: #E5484D; stroke-width: 11; stroke-linecap: round; }
+[data-skin] .tag { fill: #FFC83D; stroke: #E0A020; stroke-width: 2; }
+[data-skin] .cheek { fill: #FF8FA3; opacity: .55; }
+[data-skin] .eye { fill: var(--eye); }
+[data-skin] .pupil-round,
+[data-skin] .pupil-slit { fill: #1A1210; }
+[data-skin] .glint { fill: #fff; }
+[data-skin] .nose-glint { opacity: .7; }
+[data-skin] .nose { fill: var(--nose); }
+[data-skin] .line { fill: none; stroke: #2B1B14; stroke-width: 5; stroke-linecap: round; }
+[data-skin] .mouth-normal { stroke-width: 3.5; }
+[data-skin] .brows { stroke-width: 5; }
+[data-skin] .mouth-open { fill: #5A2A22; stroke: #2B1B14; stroke-width: 3; stroke-linejoin: round; }
+[data-skin] .tongue { fill: #FF7B8A; }
+[data-skin] .whiskers { fill: none; stroke: #6B5A50; stroke-width: 1.6; stroke-linecap: round; }
+[data-skin] .cat-stripes { fill: none; stroke: var(--stripe); stroke-width: 5; stroke-linecap: round; }
+[data-skin] .husky-mask { fill: var(--cream); }
+[data-skin] .rage { fill: #FF3B3B; opacity: 0; }
+[data-skin] .paw { fill: var(--fur); stroke: var(--paw-stroke); stroke-width: 2; }
+[data-skin] .paw-line { fill: none; stroke: var(--paw-line); stroke-width: 2; stroke-linecap: round; }
+
+/* Hidden unless a skin or mood turns them on */
+[data-skin] :is(.ears-pointy, .tail-curl, .tail-cat, .pupil-round, .pupil-slit, .whiskers,
+  .cat-stripes, .husky-mask, .brows, .eyes-happy, .eyes-angry, .mouth-happy, .mouth-angry,
+  .anger, .steam) { display: none; }
+
+.ears-pointy .ear { transform-origin: 50% 100%; }
+
+/* ── Skins ── */
+[data-skin="beagle"] {
+  --fur: #F0AE6A; --fur-body: #E8A25E; --cream: #FFF3E0; --ear: #8B5A34; --tail: #E39A55;
+  --eye: #2B1B14; --nose: #2B1B14; --paw-stroke: #D98C45; --paw-line: #C97A3A;
+}
+
+[data-skin="shiba"] {
+  --fur: #E8894A; --fur-body: #DF7F3E; --cream: #FFF4E4; --ear-inner: #FFE3C8; --tail: #E07F3F;
+  --eye: #2B1B14; --nose: #2B1B14; --paw-stroke: #C96C30; --paw-line: #B85F28;
+}
+[data-skin="shiba"] :is(.ears-floppy, .blaze, .tail-wag) { display: none; }
+[data-skin="shiba"] :is(.ears-pointy, .tail-curl) { display: inline; }
+
+[data-skin="corgi"] {
+  --fur: #F29B4B; --fur-body: #EE9443; --cream: #FFFFFF; --ear-inner: #FFD9C2; --tail: #EE9443;
+  --eye: #2B1B14; --nose: #2B1B14; --paw-stroke: #D5813A; --paw-line: #C77533;
+}
+[data-skin="corgi"] .ears-floppy { display: none; }
+[data-skin="corgi"] .ears-pointy { display: inline; }
+[data-skin="corgi"] .ears-pointy .ear { scale: 1.18; }
+
+[data-skin="husky"] {
+  --fur: #8C98A6; --fur-body: #7E8A98; --cream: #F6F8FB; --ear-inner: #F6F8FB; --tail: #7E8A98;
+  --eye: #5AA9E6; --nose: #2B1B14; --paw-stroke: #6D7885; --paw-line: #5E6873;
+}
+[data-skin="husky"] :is(.ears-floppy, .tail-wag) { display: none; }
+[data-skin="husky"] :is(.ears-pointy, .tail-curl, .husky-mask, .pupil-round) { display: inline; }
+
+[data-skin="cat"] {
+  --fur: #F2A65A; --fur-body: #EC9C4E; --cream: #FFF4E6; --ear-inner: #FFC4C4; --tail: #E8964A;
+  --eye: #8BC34A; --nose: #FF8FA3; --stripe: #D9803A; --paw-stroke: #D4833F; --paw-line: #C57636;
+}
+[data-skin="cat"] :is(.ears-floppy, .blaze, .tail-wag, .tag) { display: none; }
+[data-skin="cat"] :is(.ears-pointy, .tail-cat, .whiskers, .cat-stripes, .pupil-slit) { display: inline; }
+[data-skin="cat"] .ears-pointy .ear { scale: .8; }
+[data-skin="cat"] .muzzle { transform: scale(.85); transform-origin: 50% 30%; }

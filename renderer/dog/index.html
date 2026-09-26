@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; media-src 'self' data:">
+  <title>Timesheet Dog</title>
+  <link rel="stylesheet" href="../shared/dog-art.css">
+  <link rel="stylesheet" href="dog.css">
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="bubble interactive" id="bubble" role="alertdialog" aria-labelledby="askTitle" aria-live="assertive">
+      <span class="badge">TEST</span>
+
+      <section class="panel active" data-panel="ask">
+        <p class="title" id="askTitle"></p>
+        <div class="actions">
+          <button class="btn yes" id="btnYes" aria-keyshortcuts="Y">YES</button>
+          <button class="btn no" id="btnNo" aria-keyshortcuts="N">NO</button>
+        </div>
+        <p class="keys" aria-hidden="true"><kbd>Y</kbd> yes · <kbd>N</kbd> no · <kbd>Esc</kbd> later</p>
+      </section>
+
+      <section class="panel" data-panel="happy">
+        <p class="title big" id="happyTitle"></p>
+        <p class="sub" id="happySub"></p>
+      </section>
+
+      <section class="panel" data-panel="angry">
+        <p class="title" id="angryTitle"></p>
+        <button class="btn primary" id="btnFill" aria-keyshortcuts="F">📝 Fill Timesheet</button>
+        <div class="later" role="group" aria-label="Remind me later">
+          <span class="later-label" id="laterLabel">Remind me later</span>
+          <div class="chips" id="chips"></div>
+        </div>
+        <p class="keys" aria-hidden="true"><kbd>F</kbd> fill · <span id="snoozeKeys"></span> later</p>
+      </section>
+
+      <section class="panel" data-panel="bye">
+        <p class="title center" id="byeText"></p>
+      </section>
+    </div>
+
+    <p class="peek-note" id="peekNote" aria-hidden="true"></p>
+
+    <div class="dog-wrap" id="dog" data-skin="beagle"></div>
+
+    <div class="fx" id="fx"></div>
+  </div>
+
+  <script src="../shared/dog-art.js"></script>
+  <script src="../shared/sounds.js"></script>
+  <script src="messages.js"></script>
+  <script src="dog.js"></script>
+</body>
+</html>

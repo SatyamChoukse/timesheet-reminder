@@ -1,0 +1,58 @@
+{
+  "name": "timesheet-dog",
+  "productName": "Timesheet Dog",
+  "version": "1.0.1",
+  "description": "A cute dog that pops out of the side of your screen to remind you to fill your timesheet.",
+  "author": "Timesheet Dog",
+  "main": "main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test \"tests/*.test.js\"",
+    "lint": "eslint .",
+    "icon": "node scripts/make-icon.js",
+    "predist": "node scripts/prepare-env.js && node scripts/make-icon.js",
+    "dist": "node --experimental-require-module --no-warnings=ExperimentalWarning node_modules/electron-builder/cli.js --win"
+  },
+  "build": {
+    "appId": "com.timesheetdog.app",
+    "productName": "Timesheet Dog",
+    "copyright": "Copyright © 2026 Timesheet Dog",
+    "artifactName": "${productName}-Setup-${version}.${ext}",
+    "files": [
+      "main/**",
+      "renderer/**",
+      "preload.js",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": ".env",
+        "to": ".env"
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "Timesheet Dog",
+      "uninstallDisplayName": "Timesheet Dog",
+      "include": "installer/installer.nsh"
+    }
+  },
+  "dependencies": {
+    "dotenv": "^18.0.4",
+    "electron-log": "^5.4.4",
+    "electron-updater": "^6.8.9"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "electron": "^41.7.1",
+    "electron-builder": "^26.15.3",
+    "eslint": "^9.39.5",
+    "globals": "^17.12.0"
+  }
+}
